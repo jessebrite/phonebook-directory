@@ -32,6 +32,11 @@ public class Owner {
 	@Size(max = 45, message = "Last name should not be more than 45 characters")
 	private final String lastname;
 
+	@NotBlank(message = "Username is required")
+	@Size(max = 25, message = "Username must not be more thant 25 characters long")
+	@Size(min = 3, message = "Username must be at least 3 characters long")
+	private final String username;
+
 	@NotBlank(message = "Email is required")
 	@Size(max = 45)
 	@Column(nullable = false, unique = true)
