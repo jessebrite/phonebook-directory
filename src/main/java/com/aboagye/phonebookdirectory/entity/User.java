@@ -4,15 +4,19 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+@Slf4j // for logging
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @RequiredArgsConstructor
 @Data
@@ -34,4 +38,7 @@ public class User {
 	@Size(max = 45)
 	@Email
 	private final String email;
+
+	@ManyToMany(mappedBy = "serviceType")
+	Set<Owner> owners = new HashSet<>();
 }

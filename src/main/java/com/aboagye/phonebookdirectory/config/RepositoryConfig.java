@@ -1,4 +1,4 @@
-package com.aboagye.phonebookdirectory;
+package com.aboagye.phonebookdirectory.config;
 
 
 import org.springframework.context.annotation.Configuration;

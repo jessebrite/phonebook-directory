@@ -4,17 +4,28 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
-@Table(name = "owner")
+/**
+ * <h1>Owner Entity</h1>
+ * The Owner class describes the mobile subscriber and details their respective
+ * attributes
+ *
+ * @author Aboagye Bright
+ * @version 1.0.0
+ * @since 11-05-2021
+ */
+
+@Table(name = "owners",
+	uniqueConstraints = {
+		@UniqueConstraint(columnNames = "email"),
+		@UniqueConstraint(columnNames = "msisdn"),
+	})
 @Entity
 @Data
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
@@ -25,37 +36,50 @@ public class Owner {
 	private Integer id;
 
 	@NotBlank
+	@Column(name = "first_name", nullable = false)
 	@Size(max = 25, message = "First name should not be more than 25 characters")
-	private final String firstname;
+	private final String firstName;
 
 	@NotBlank
 	@Size(max = 45, message = "Last name should not be more than 45 characters")
-	private final String lastname;
-
-	@NotBlank(message = "Username is required")
-	@Size(max = 25, message = "Username must not be more thant 25 characters long")
-	@Size(min = 3, message = "Username must be at least 3 characters long")
-	private final String username;
+	@Column(name = "last_name", nullable = false)
+	private final String lastName;
 
 	@NotBlank(message = "Email is required")
 	@Size(max = 45)
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	@Email
 	private final String email;
 
 	@NotBlank
-	@Column(name = "msisdn", nullable = false, unique = true)
+	@Column(name = "msisdn")
 	@Size(max = 12, message = "msisdn should not be more than 12 characters")
 	private final String msisdn;
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "user_owner",
-		joinColumns = @JoinColumn(name = "customer_id_owner"),
-		inverseJoinColumns = @JoinColumn(name = "customer_id_user"))
+	/**
+	 * Creates a reference table for owners and users.
+	 * Since many owners can pay for many users and many users can use
+	 * many lines paid for by many owners, @ManyToMany is ideal
+	 */
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "owners_users",
+		joinColumns = @JoinColumn(name = "owners_id"),
+		inverseJoinColumns = @JoinColumn(name = "users_id"))
 	private Set<User> users = new HashSet<>();
 
-	@ManyToOne(targetEntity = ServiceType.class)
-	@Value("${EnumType.STRING:MOBILE_PREPAID}")
-	@NotNull(message = "Please choose a service plan")
-	private ServiceType serviceTypes;
+//	@ManyToOne(targetEntity = User.class)
+//	private User users;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "service_type")
+//	@NotNull(message = "Please select a service plan")
+	private ServiceType serviceType;
+
+	@Column(name = "service_start_date")
+	private Date createdAt;
+
+	@PrePersist
+	void createdAt() {
+		this.createdAt = new Date();
+	}
 }
