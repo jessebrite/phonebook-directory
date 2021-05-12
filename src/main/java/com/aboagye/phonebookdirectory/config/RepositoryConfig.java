@@ -1,5 +1,6 @@
 package com.aboagye.phonebookdirectory;
 
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -19,7 +20,7 @@ public class RepositoryConfig implements RepositoryRestConfigurer {
 
 	@Override
 	public void configureRepositoryRestConfiguration(
-	RepositoryRestConfiguration config, CorsRegistry cors) {
+		RepositoryRestConfiguration config, CorsRegistry cors) {
 //	Expose ID field in the REST endpoints
 		config.exposeIdsFor(entityManager.getMetamodel()
 			.getEntities()
