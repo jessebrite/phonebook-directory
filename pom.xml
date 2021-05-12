@@ -11,6 +11,7 @@
   <groupId>com.aboagye</groupId>
   <artifactId>phonebook-directory</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
   <name>phonebook-directory</name>
   <description>REST endpoint for a mobile subscriber service</description>
   <properties>

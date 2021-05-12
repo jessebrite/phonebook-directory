@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -21,6 +22,7 @@ import java.util.*;
  * @since 11-05-2021
  */
 
+@Slf4j // for logging
 @Table(name = "owners",
 	uniqueConstraints = {
 		@UniqueConstraint(columnNames = "email"),

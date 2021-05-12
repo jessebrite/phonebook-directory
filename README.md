@@ -32,5 +32,5 @@ that match a certain criteria.
 
 `POST` /api/v1/owners - adds a mobile subscriber ti the database.
 
-`PUT` /api/v1/service_type - change a mobile number plan from prepaid to postpaid
+`PATCH` /api/v1/owners/{id} - change a mobile number plan from prepaid to postpaid
 or vice versa

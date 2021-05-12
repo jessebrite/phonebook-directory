@@ -10,9 +10,18 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
+/**
+ * <h1>User Entity</h1>
+ * The User class describes the users of mobile subscriptions paid for by owners
+ * attributes
+ *
+ * @author Aboagye Bright
+ * @version 1.0.0
+ * @since 11-05-2021
+ */
 
 @Slf4j // for logging
 @Entity
@@ -39,6 +48,6 @@ public class User {
 	@Email
 	private final String email;
 
-	@ManyToMany(mappedBy = "serviceType")
-	Set<Owner> owners = new HashSet<>();
+	@ManyToMany(mappedBy = "users")
+	private Set<Owner> owners = new HashSet<>();
 }
