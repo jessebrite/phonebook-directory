@@ -69,9 +69,6 @@ public class Owner {
 		inverseJoinColumns = @JoinColumn(name = "users_id"))
 	private Set<User> users = new HashSet<>();
 
-//	@ManyToOne(targetEntity = User.class)
-//	private User users;
-
 	@Enumerated(EnumType.STRING)
 	@Column(name = "service_type")
 //	@NotNull(message = "Please select a service plan")

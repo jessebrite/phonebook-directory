@@ -1,9 +1,10 @@
 spring:
+#  DB config
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/phonebook-directory
-    username: abj
-    password: abj.MySQL_4_L!fe
+    url: jdbc:mysql://localhost:3306/<name-of-DB>
+    username: <username-goes-here>
+    password: <password-goes-here>
     initialization-mode: always
 
   jpa:
@@ -14,7 +15,7 @@ spring:
     hibernate:
       ddl-auto: update
 
-  #API endpoints
+#  API endpoints
   data:
     rest:
       base-path: /api/v1

@@ -11,7 +11,7 @@ global config.
 ## Tech Stack
 The following are the tech stack used for implementation
 - MySQL: This was used for data persistence.
-- Project Lombok: we generated all our POJOs boilerpate code with Lombok.
+- Project Lombok: we generated all our `POJOs` boilerplate code with Lombok.
 Also, other relevant methods like constructors were generated on the fly with 
   annotations like `@Data`.
 - JPA: we took advantage of Spring `JPA`'s `CRUD` repository's implementation to 
@@ -22,7 +22,7 @@ cater for basic SQL operations.
 
 ## Endpoints
 Below is a brief description of some of the endpoints;
-kindly visit `http://localhost:8080/api/v1/swagger-ui.html for a thorough
+kindly visit http://localhost:8080/api/v1/swagger-ui.html for a thorough
 description of all the endpoints.
 
 `GET` /api/v1/owners - retrieves all subscriber owners.
@@ -34,3 +34,7 @@ that match a certain criteria.
 
 `PATCH` /api/v1/owners/{id} - change a mobile number plan from prepaid to postpaid
 or vice versa
+
+## Running the application
+Kindly change the datasource configurations in `application.yml` under the
+`resources` directory to your DB settings directory and start the application.
